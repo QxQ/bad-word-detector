@@ -1,0 +1,31 @@
+{
+    "bad-test-values": [
+        "brick",
+        "BRIck",
+        "brlck",
+        "br|ck",
+        "brik",
+        "briiick",
+        "br i  ck",
+        "br...ick",
+        "bhrick",
+        "bicrk"
+    ],
+    "bad-words": [
+        "brick",
+        "pumpkin",
+        "bomb",
+        "cheese",
+        "cobble"
+    ],
+    "banned-methods": [],
+    "good-test-values": [
+        "",
+        "@!#$%",
+        "hello world",
+        "brLck",
+        "Bhr|||||k"
+    ],
+    "run-test": false,
+    "use-ui-by-default": true
+}
