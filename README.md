@@ -12,7 +12,7 @@ a bad word detector thats hard to outsmart
    this program, along with all the little libraries it uses are licensed under the mit lisense, unless a library says so otherwise.
    
 
-	__this program is still in beta, so most of the features above, don't actually work yet.__
+__this program is still in beta, so most of the features above, don't actually work yet.__
 	
 ## installation ##
 

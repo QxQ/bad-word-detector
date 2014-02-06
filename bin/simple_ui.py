@@ -4,7 +4,7 @@ class Simple_ui():
 	'''
 	title: what shows at the top of the screen. leave blank to not show a title. you can make a more custamizable by disabling this, and showing your own title in the before-small-help param.
 	commands: a list of commands that the user can use. eg: [<command>,<command>]. make the commands with ui_command()
-	default_command: a function that will be used if the prompt doesn't match any of the commands.
+	default_command: a function that will be used if the prompt doesn't match any of the commands. I think you must use ui_command()
 	options: some additional options you can configure
 	'''
 	def __init__(self,title='', commands=[], default_command=None, options={}):

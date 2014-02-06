@@ -26,6 +26,125 @@ class String_stuff():
 		for i in range(len(result)):
 			result[i] = textwrap.fill(result[i], width=line_size)
 		return '\n'.join(result)
+		
+class Complex_string(): # a string that can have multiple items be in the same index, and more
+	def __init__(self, value=[]):
+		new_value = [] #example: [Complex_list_item, Complex_list_item, ...]
+		for char in value:
+			new_value.append(Complex_string_item([char]))
+		self.value = new_value #you can access self.value directly
+	
+	def append(self, items): #items is a list of possible items for this index.
+		self.value.append( Complex_string_item(items) )
+	
+	def find(self, key):
+			
+		def findInIndex(index):
+			keyPoss = [0]
+			for valueIndex in range(index,len(self.value)):
+				newKeyPoss=[]
+				for keyPossIndex,keyPos in enumerate(keyPoss):
+					for possible in self.value[valueIndex]:
+						if len(possible)+keyPos<=len(key) and key[keyPos:len(possible)+keyPos]==possible:
+							newKeyPos = keyPoss[keyPossIndex]+len(possible)
+							if newKeyPos==len(key):
+								return True
+							if newKeyPos not in newKeyPoss:
+								newKeyPoss.append(newKeyPos)
+				keyPoss = newKeyPoss
+				if len(keyPoss)==0:
+					return False
+			return False
+		
+		for valueIndex in range(len(self.value)):
+			if findInIndex(valueIndex):
+				return valueIndex
+			
+		'''
+		possible = [] #list containing indexes where the first letter of key can match up to self.value. e.g. [[3,1,2]] where 3 is orriginal index, 1 and 2 are things that are added to that index
+		for i,item in enumerate(self.value):
+			if key[0]==item:
+				possible.append([i,0])
+			remove = [] #we don't remove items from the possible list in real time so we don't mess up the looping, so this is done after.
+			for pIndex,p in enumerate(possible):
+				difference = i-p[0] #how long the word is so far as they get matched up
+				subRemove = []
+				for pAddIndex,pAdd in enumerate(p[1:]):
+					if key[difference+pAdd]!=item:
+						if len(p)==1:
+							remove.append(pIndex)
+						else:
+							subRemove.append()
+					else:
+						if len(key)==difference+1:
+							return i
+			remove.sort()
+			for p in reversed(remove):
+				possible.pop(p)
+		'''
+	
+	def get(self, index=None):
+		if index==None:
+			return self.value
+		else:
+			return self.value[index]
+	
+	def __contains__(self,key):
+		return self.find(key)!=None
+	
+	def __iter__(self):
+		for i in self.value:
+			yield i
+	
+	def __repr__(self):
+		return '[complex string: '+str(self.value)[1:-1]+']'
+				
+				
+					
 
-if __name__=='__main__': #just for testing purpoeses
-	a = String_stuff('hello world')
+class Complex_string_item(object): #an index in a Complex_string. this index can containt multiple items unlike a normal string.
+	def __init__(self,items=[], raw_items=[]):
+		if raw_items:
+			items = raw_items
+		else:
+			self.value=[] #example: [{'char':a,...}, {...}]
+			for item in items:
+				self.add(item)
+	
+	def add(self, value, condition=lambda: True): #adds an item and returns id. If the item is already there, returns the id of that item instead.
+		for i in self.value:
+			if value==i['char']:
+				return i['id']
+		obj = {'char':value,'condition':condition}
+		obj['id']=id(obj)
+		self.value.append(obj)
+		return obj['id']
+	
+	def remove(self, Id): #removes an item by id
+		for i in range(len(self.value)):
+			if self.value[i]['id']==Id:
+				return self.value.pop(i)
+	
+	def get(index=None): #anything you want to do with getting a charcter, use this function. otherwise, use self.value to get the raw stuff.
+		if index==None:
+			return [i['char'] for i in self.value]
+		else:
+			return self.value[index]['char']
+	
+	def __contains__(self,key):
+		return key in [i['char'] for i in self.value]
+	
+	def __iter__(self):
+		for i in self.value:
+			yield i['char']
+	
+	def __repr__(self):
+		val = str([i['char'] for i in self.value])[1:-1]
+		val = val.replace(', ','|')
+		return val
+	__eq__ = __contains__
+
+if __name__=='__main__':
+	a=Complex_string('abc')
+	a.get(1).add('')
+	a.get(2).add('de')
