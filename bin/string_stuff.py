@@ -59,29 +59,6 @@ class Complex_string(): # a string that can have multiple items be in the same i
 		for valueIndex in range(len(self.value)):
 			if findInIndex(valueIndex):
 				return valueIndex
-			
-		'''
-		possible = [] #list containing indexes where the first letter of key can match up to self.value. e.g. [[3,1,2]] where 3 is orriginal index, 1 and 2 are things that are added to that index
-		for i,item in enumerate(self.value):
-			if key[0]==item:
-				possible.append([i,0])
-			remove = [] #we don't remove items from the possible list in real time so we don't mess up the looping, so this is done after.
-			for pIndex,p in enumerate(possible):
-				difference = i-p[0] #how long the word is so far as they get matched up
-				subRemove = []
-				for pAddIndex,pAdd in enumerate(p[1:]):
-					if key[difference+pAdd]!=item:
-						if len(p)==1:
-							remove.append(pIndex)
-						else:
-							subRemove.append()
-					else:
-						if len(key)==difference+1:
-							return i
-			remove.sort()
-			for p in reversed(remove):
-				possible.pop(p)
-		'''
 	
 	def get(self, index=None):
 		if index==None:
@@ -143,8 +120,3 @@ class Complex_string_item(object): #an index in a Complex_string. this index can
 		val = val.replace(', ','|')
 		return val
 	__eq__ = __contains__
-
-if __name__=='__main__':
-	a=Complex_string('abc')
-	a.get(1).add('')
-	a.get(2).add('de')

@@ -9,7 +9,7 @@
 		"cobble"
 	],
 	
-	"simular-sounds":[["n","kn"],["c","k","ck"],["ee","ea"],["e","i"],["u","ou"],["oo","ue"],["ow","ou"],["ay","eigh"],["o","oi"]],
+	"simular-sounds":[["n","kn"],["c","k","ck"],["ee","ea"],["e","i"],["u","ou"],["oo","ue"],["ow","ou"],["ay","eigh"],["o","oi"],["s","z"]],
 	"simular-chars":[["i","|","!","l"],["$","s"],["o","0"],["@","a"]],
 	
 	"run-test":false,

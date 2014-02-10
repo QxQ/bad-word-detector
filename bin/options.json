@@ -81,6 +81,10 @@
         [
             "o",
             "oi"
+        ],
+        [
+            "s",
+            "z"
         ]
     ],
     "use-ui-by-default": true,
